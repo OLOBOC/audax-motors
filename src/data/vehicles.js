@@ -24,8 +24,8 @@ export const VEHICLES = [
     mainImage: "/cars/honda_civic_real.jpg",
     gallery: [
       "/cars/honda_civic_real.jpg",
-      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80"
+      "/img/stock_01.png",
+      "/img/stock_02.png"
     ],
     equipment: [
       "Acabado Sport Plus tope de gama",
@@ -39,7 +39,7 @@ export const VEHICLES = [
       "Interior amplio y maletero de gran capacidad",
       "Consumo medio homologado de 6,7 l/100 km"
     ],
-    description: "Un Civic especialmente atractivo para quienes buscan deportividad, tecnología y sensaciones de conducción sin renunciar al confort diario. Mantenimiento al día con historial completo en servicio oficial. ITV recién pasada válida hasta mayo de 2026. Revisión de los 120.000 km realizada hace 3 meses con reglaje de válvulas, cambio de filtro de gasolina, aceite de caja de cambios, bujías sustituidas y pastillas traseras nuevas. 4 neumáticos Goodyear con menos de 2.000 km. Facturas de mantenimiento disponibles."
+    description: "Un Civic especialmente atractivo para quienes buscan deportividad, tecnología y sensaciones de conducción sin renunciar al confort diario. Mantenimiento al día con historial completo en servicio oficial. ITV recién pasada válida hasta mayo de 2026. Revisión de los 120.000 km realizada hace 3 meses con reglaje de válvulas, cambio de filtro de gasolina, aceite de caja de cambios, bujías sustituidas y pastillas traseras nuevas. 4 neumáticos Goodyear con menos de 2.000 km."
   },
   {
     id: "mercedes-clase-a-amg-rojo",
@@ -66,8 +66,8 @@ export const VEHICLES = [
     mainImage: "/cars/mercedes_clase_a_red_real.jpg",
     gallery: [
       "/cars/mercedes_clase_a_red_real.jpg",
-      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80"
+      "/img/stock_03.png",
+      "/img/stock_04.png"
     ],
     equipment: [
       "Paquete deportivo AMG Line completo",
@@ -107,8 +107,8 @@ export const VEHICLES = [
     mainImage: "/cars/mercedes_cla_real.jpg",
     gallery: [
       "/cars/mercedes_cla_real.jpg",
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1200&q=80"
+      "/img/stock_05.png",
+      "/img/stock_06.png"
     ],
     equipment: [
       "Paquete deportivo exterior e interior AMG Line",
@@ -146,7 +146,9 @@ export const VEHICLES = [
     tagline: "Berlina ejecutiva potente con 220 CV, interior en cuero beige y equipamiento máximo",
     mainImage: "/cars/opel_insignia_real.jpg",
     gallery: [
-      "/cars/opel_insignia_real.jpg"
+      "/cars/opel_insignia_real.jpg",
+      "/img/stock_07.png",
+      "/img/stock_08.png"
     ],
     equipment: [
       "Motor 2.0 Turbo de 220 CV con empuje soberbio",
@@ -184,7 +186,9 @@ export const VEHICLES = [
     tagline: "El familiar definitivo para devorar kilómetros con aplomo y confort superior",
     mainImage: "/cars/bmw_serie5_touring_real.jpg",
     gallery: [
-      "/cars/bmw_serie5_touring_real.jpg"
+      "/cars/bmw_serie5_touring_real.jpg",
+      "/img/stock_09.png",
+      "/img/stock_10.png"
     ],
     equipment: [
       "Paquete deportivo M exterior e interior",
@@ -221,7 +225,9 @@ export const VEHICLES = [
     tagline: "Compacto ágil, fiable y económico para la ciudad y carretera",
     mainImage: "/cars/peugeot_207_real.jpg",
     gallery: [
-      "/cars/peugeot_207_real.jpg"
+      "/cars/peugeot_207_real.jpg",
+      "/img/stock_11.png",
+      "/img/stock_12.png"
     ],
     equipment: [
       "Acabado Sport con asientos envolventes",
@@ -234,74 +240,78 @@ export const VEHICLES = [
     description: "Vehículo en estado impecable tanto de mecánica como de chapa. Ideal para primer coche o uso diario. Mantenimiento recién realizado y garantía incluida."
   },
   {
-    id: "bmw-m4-competition-2022",
-    slug: "bmw-m4-competition-2022",
-    brand: "BMW",
-    model: "M4 Competition Coupé",
-    version: "3.0 M TwinPower Turbo 510 CV Steptronic",
-    price: 88500,
-    priceFormatted: "88.500 €",
-    monthlyPrice: "920 €/mes*",
-    year: 2022,
-    mileage: 26400,
-    mileageFormatted: "26.400 km",
-    fuel: "Gasolina",
+    id: "seat-tarraco-fr-suv",
+    slug: "seat-tarraco-fr-suv",
+    brand: "SEAT",
+    model: "Tarraco FR / Ateca SUV",
+    version: "2.0 TDI 150 CV DSG 7-Vel",
+    price: 26900,
+    priceFormatted: "26.900 €",
+    monthlyPrice: "295 €/mes*",
+    year: 2021,
+    mileage: 64000,
+    mileageFormatted: "64.000 km",
+    fuel: "Diésel",
     gearbox: "Automático",
-    power: "510 CV",
-    doors: 2,
-    seats: 4,
-    color: "Isle of Man Green",
-    traction: "Propulsión trasera M",
-    badge: "Gama Alta Selección",
+    power: "150 CV",
+    doors: 5,
+    seats: 7,
+    color: "Blanco Nevada Metalizado",
+    traction: "Tracción delantera",
+    badge: "Vehículo Real Audax",
     featured: true,
-    tagline: "La cúspide del diseño agresivo y rendimiento M Motorsport",
-    mainImage: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80",
+    tagline: "SUV deportivo de 7 plazas con acabado FR y máxima capacidad familiar",
+    mainImage: "/cars/seat_tarraco_real.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80"
+      "/cars/seat_tarraco_real.jpg",
+      "/img/stock_13.png",
+      "/img/stock_14.png"
     ],
     equipment: [
-      "Techo en fibra de carbono M Carbon",
-      "Asientos envolventes M Sport con memorias",
-      "Frenos deportivos M con pinzas rojas",
-      "Faros Láser BMW Laserlight adaptativos",
-      "Harman Kardon Surround Sound System"
+      "Acabado FR con paragolpes y parrilla deportiva",
+      "Cuadro Digital Cockpit de 10,25 pulgadas",
+      "Llantas de aleación FR de 19 pulgadas",
+      "Asientos baquet deportivos tapizados en tela y alcántara",
+      "Luces Full LED delanteras y traseras infinitas"
     ],
-    description: "Configuración única. Vehículo nacional de único propietario con mantenimiento al día en concesionario oficial BMW."
+    description: "Espectacular SUV familiar nacional con acabado FR. Amplio espacio interior, 7 plazas homologadas, estado impecable con historial completo en servicio oficial."
   },
   {
-    id: "porsche-macan-gts-2021",
-    slug: "porsche-macan-gts-2021",
-    brand: "Porsche",
-    model: "Macan GTS",
-    version: "2.9 V6 Biturbo 440 CV PDK",
-    price: 79900,
-    priceFormatted: "79.900 €",
-    monthlyPrice: "830 €/mes*",
-    year: 2021,
-    mileage: 44100,
-    mileageFormatted: "44.100 km",
+    id: "bmw-e36-320i-coupe",
+    slug: "bmw-e36-320i-coupe",
+    brand: "BMW",
+    model: "Serie 3 Coupé (E36)",
+    version: "320i 6 Cilindros 150 CV Manual",
+    price: 9900,
+    priceFormatted: "9.900 €",
+    monthlyPrice: "125 €/mes*",
+    year: 1996,
+    mileage: 184000,
+    mileageFormatted: "184.000 km",
     fuel: "Gasolina",
-    gearbox: "Automático",
-    power: "440 CV",
-    doors: 5,
+    gearbox: "Manual",
+    power: "150 CV",
+    doors: 2,
     seats: 5,
-    color: "Negro Jet Metalizado",
-    traction: "Tracción total activa Porsche",
-    badge: "Gama Alta Selección",
+    color: "Azul Bostongrün Metalizado",
+    traction: "Propulsión trasera",
+    badge: "Youngtimer Audax",
     featured: false,
-    tagline: "El equilibrio definitivo entre versatilidad SUV y ADN de circuito Porsche",
-    mainImage: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+    tagline: "Unidad clásica Youngtimer en constante revalorización con motor 6 cilindros en línea",
+    mainImage: "/cars/bmw_e36_real.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
+      "/cars/bmw_e36_real.jpg",
+      "/img/stock_01.png",
+      "/img/stock_05.png"
     ],
     equipment: [
-      "Paquete Sport Chrono",
-      "Suspensión neumática adaptativa con PASM",
-      "Sistema de escape deportivo Porsche",
-      "Llantas RS Spyder Design de 21\""
+      "Motor M52B20 6 cilindros atmosférico inolvidable",
+      "Paquete exterior M Technik",
+      "Llantas estilo M de época",
+      "Caja manual de 5 velocidades de tacto directo",
+      "Dirección asistida y elevalunas eléctricos"
     ],
-    description: "Excelente ejemplar de Macan GTS. Se entrega completamente revisado con neumáticos nuevos y libro sellado en centro Porsche."
+    description: "Pieza de colección en alza. Carrocería E36 súper sana, sin óxidos, mantenido con mimo y con sonido único 6 cilindros BMW."
   }
 ];
 
