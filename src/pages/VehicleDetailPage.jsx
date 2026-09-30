@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { COMPANY_INFO } from '../data/vehicles';
+import FinanceCalculator from '../components/FinanceCalculator';
 import { 
   ArrowLeft, MessageCircle, Phone, Mail, Calendar, Gauge, Fuel, Cog, 
   Zap, ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight, Share2, 
-  MapPin, Clock, FileCheck 
+  MapPin, FileCheck, Sparkles 
 } from 'lucide-react';
 
 export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal }) {
@@ -12,11 +13,12 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
 
   if (!vehicle) {
     return (
-      <div className="pt-32 pb-20 max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-2xl font-bold text-white mb-4">Vehículo no encontrado</h2>
+      <div className="pt-32 pb-20 max-w-7xl mx-auto px-4 text-center space-y-4">
+        <h2 className="text-2xl font-bold text-white font-display">Vehículo no encontrado</h2>
         <button
+          type="button"
           onClick={onBack}
-          className="px-6 py-2.5 rounded-xl bg-[#C5A880] text-black font-bold text-xs uppercase tracking-wider"
+          className="px-6 py-3 rounded-xl bg-gold-gradient text-black font-extrabold text-xs uppercase tracking-wider"
         >
           Volver al catálogo
         </button>
@@ -44,7 +46,7 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
     }
   };
 
-  const whatsappLink = `https://wa.me/34672944379?text=${encodeURIComponent(
+  const whatsappLink = `https://wa.me/${COMPANY_INFO.phoneRaw}?text=${encodeURIComponent(
     `Hola Audax Motors! Me gustaría recibir más información o concertar una cita para ver el ${vehicle.brand} ${vehicle.model} (${vehicle.priceFormatted}).`
   )}`;
 
@@ -54,19 +56,21 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
       {/* Top Bar: Back & Share */}
       <div className="flex items-center justify-between">
         <button
+          type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A0A4B4] hover:text-[#C5A880] transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-[#D4AF37] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Volver al Stock</span>
+          <span>Volver al Catálogo</span>
         </button>
 
         <button
+          type="button"
           onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#141620] border border-[#232534] text-xs text-[#CBD0DF] hover:text-white transition-colors"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-black/60 border border-white/10 text-xs text-gray-300 hover:text-white transition-colors"
         >
           <Share2 className="w-3.5 h-3.5" />
-          <span>{copied ? '¡Enlace copiado!' : 'Compartir ficha'}</span>
+          <span>{copied ? '¡Enlace copiado!' : 'Compartir vehículo'}</span>
         </button>
       </div>
 
@@ -78,7 +82,7 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
           
           {/* Gallery Main Container */}
           <div className="space-y-4">
-            <div className="relative aspect-[16/10] bg-[#0A0B0E] rounded-3xl overflow-hidden border border-[#222432] shadow-2xl group">
+            <div className="relative aspect-[16/10] bg-[#0A0B0E] rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
               <img
                 src={galleryImages[selectedImageIndex]}
                 alt={`${vehicle.brand} ${vehicle.model} - foto ${selectedImageIndex + 1}`}
@@ -89,16 +93,18 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
               {galleryImages.length > 1 && (
                 <>
                   <button
+                    type="button"
                     onClick={handlePrevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 border border-white/10"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/70 hover:bg-black text-white backdrop-blur-md flex items-center justify-center transition-all border border-white/15 shadow-xl"
                     aria-label="Foto anterior"
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </button>
 
                   <button
+                    type="button"
                     onClick={handleNextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 border border-white/10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/70 hover:bg-black text-white backdrop-blur-md flex items-center justify-center transition-all border border-white/15 shadow-xl"
                     aria-label="Siguiente foto"
                   >
                     <ChevronRight className="w-6 h-6" />
@@ -107,14 +113,14 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
               )}
 
               {/* Bottom Image Counter */}
-              <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-xs text-white font-medium">
+              <div className="absolute bottom-4 right-4 px-3.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-xs text-white font-mono font-bold">
                 {selectedImageIndex + 1} / {galleryImages.length}
               </div>
 
               {/* Vehicle Badge */}
               {vehicle.badge && (
                 <div className="absolute top-4 left-4">
-                  <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0C0D12]/90 backdrop-blur-md text-[#EAD5B5] border border-[#C5A880]/50 shadow-md">
+                  <span className="px-3.5 py-1.5 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 shadow-lg">
                     {vehicle.badge}
                   </span>
                 </div>
@@ -127,11 +133,12 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
                 {galleryImages.map((img, idx) => (
                   <button
                     key={idx}
+                    type="button"
                     onClick={() => setSelectedImageIndex(idx)}
                     className={`relative aspect-[16/10] rounded-xl overflow-hidden border-2 transition-all ${
                       selectedImageIndex === idx
-                        ? 'border-[#C5A880] scale-95 shadow-md shadow-[#C5A880]/30'
-                        : 'border-[#1E202B] opacity-60 hover:opacity-100'
+                        ? 'border-[#D4AF37] scale-95 shadow-lg shadow-amber-500/20'
+                        : 'border-white/10 opacity-60 hover:opacity-100'
                     }`}
                   >
                     <img
@@ -146,84 +153,87 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
           </div>
 
           {/* Key Specifications Grid */}
-          <div className="bg-[#101118] border border-[#1E202B] rounded-3xl p-6 sm:p-8 space-y-6">
-            <h3 className="text-lg font-bold font-display text-white border-b border-[#1C1E2A] pb-3">
-              Ficha Técnica Destacada
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-6 border border-white/10">
+            <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-3 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" /> Ficha Técnica Oficial
             </h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Año</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Año</span>
                 </div>
                 <div className="text-base font-bold text-white">{vehicle.year}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <Gauge className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Kilometraje</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Kilometraje</span>
                 </div>
                 <div className="text-base font-bold text-white">{vehicle.mileageFormatted}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <Zap className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Potencia</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Potencia</span>
                 </div>
                 <div className="text-base font-bold text-white">{vehicle.power}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <Fuel className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Combustible</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Combustible</span>
                 </div>
                 <div className="text-base font-bold text-white">{vehicle.fuel}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <Cog className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Cambio</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Cambio</span>
                 </div>
                 <div className="text-base font-bold text-white">{vehicle.gearbox}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="flex items-center gap-2 text-[#C5A880] mb-1">
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="flex items-center gap-2 text-[#D4AF37] mb-1">
                   <ShieldCheck className="w-4 h-4" />
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#828699]">Tracción</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Tracción</span>
                 </div>
                 <div className="text-xs font-bold text-white truncate">{vehicle.traction}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="text-[10px] uppercase font-bold tracking-wider text-[#828699] mb-1">Color Ext.</div>
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-1">Color Ext.</div>
                 <div className="text-xs font-bold text-white truncate">{vehicle.color}</div>
               </div>
 
-              <div className="bg-[#151620] p-3.5 rounded-2xl border border-[#222432]">
-                <div className="text-[10px] uppercase font-bold tracking-wider text-[#828699] mb-1">Puertas / Plazas</div>
+              <div className="bg-black/50 p-4 rounded-2xl border border-white/5">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-gray-400 mb-1">Puertas / Plazas</div>
                 <div className="text-xs font-bold text-white">{vehicle.doors}p · {vehicle.seats} plazas</div>
               </div>
 
             </div>
           </div>
 
+          {/* Embedded Finance Calculator */}
+          <FinanceCalculator initialPrice={vehicle.price} vehicleName={`${vehicle.brand} ${vehicle.model}`} />
+
           {/* Equipment List */}
           {vehicle.equipment && (
-            <div className="bg-[#101118] border border-[#1E202B] rounded-3xl p-6 sm:p-8 space-y-4">
-              <h3 className="text-lg font-bold font-display text-white border-b border-[#1C1E2A] pb-3">
+            <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-4 border border-white/10">
+              <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-3">
                 Equipamiento y Extras Destacados
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 {vehicle.equipment.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 text-xs text-[#CBD0DF]">
-                    <CheckCircle2 className="w-4 h-4 text-[#C5A880] flex-shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -232,26 +242,26 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
           )}
 
           {/* Description */}
-          <div className="bg-[#101118] border border-[#1E202B] rounded-3xl p-6 sm:p-8 space-y-4">
-            <h3 className="text-lg font-bold font-display text-white border-b border-[#1C1E2A] pb-3">
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 space-y-4 border border-white/10">
+            <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-3">
               Descripción del Vehículo
             </h3>
-            <p className="text-sm text-[#A0A4B4] leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed">
               {vehicle.description}
             </p>
 
-            <div className="pt-4 border-t border-[#1C1E2A] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[#CBD0DF]">
+            <div className="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-300">
               <div className="flex items-center gap-2">
-                <FileCheck className="w-4 h-4 text-[#C5A880]" />
-                <span>Kilometraje Certificado</span>
+                <FileCheck className="w-4 h-4 text-[#D4AF37]" />
+                <span>Historial Verificado</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#C5A880]" />
-                <span>Libre de Cargas y Siniestros</span>
+                <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+                <span>Garantía Europea 12 Meses</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#C5A880]" />
-                <span>Disponible en Gijón</span>
+                <MapPin className="w-4 h-4 text-[#D4AF37]" />
+                <span>Exposición en Gijón</span>
               </div>
             </div>
           </div>
@@ -261,33 +271,35 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
         {/* Right Column: Sticky Action & Contact Card (4 Cols) */}
         <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
           
-          <div className="bg-[#101118] border border-[#222432] rounded-3xl p-6 sm:p-7 shadow-2xl space-y-6">
+          <div className="glass-panel-gold rounded-3xl p-6 sm:p-7 shadow-2xl space-y-6 border border-amber-500/20">
             
             {/* Header / Brand */}
             <div>
-              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A880]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
                 {vehicle.brand}
-              </div>
+              </span>
               <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white mt-1">
                 {vehicle.model}
               </h1>
-              <p className="text-xs text-[#828699] mt-1">
+              <p className="text-xs text-gray-400 mt-1">
                 {vehicle.version}
               </p>
             </div>
 
             {/* Price section */}
-            <div className="py-4 border-y border-[#1E202B]">
-              <div className="text-[11px] uppercase tracking-wider text-[#828699]">
+            <div className="py-4 border-y border-white/10">
+              <span className="text-[11px] uppercase tracking-wider text-gray-400 block">
                 Precio al contado
-              </div>
+              </span>
               <div className="text-3xl sm:text-4xl font-black font-display text-white mt-0.5">
                 {vehicle.priceFormatted}
               </div>
-              <div className="text-[11px] text-[#A0A4B4] mt-1 flex items-center gap-1.5">
-                <span>Financiación disponible desde</span>
-                <span className="text-[#C5A880] font-semibold">{vehicle.monthlyPrice}</span>
-              </div>
+              {vehicle.monthlyPrice && (
+                <div className="text-xs text-gray-300 mt-2 flex items-center gap-1.5">
+                  <span>Financiación orientativa desde</span>
+                  <span className="text-[#D4AF37] font-bold">{vehicle.monthlyPrice}</span>
+                </div>
+              )}
             </div>
 
             {/* CTAs */}
@@ -296,49 +308,50 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
+                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Contactar por WhatsApp</span>
+                <span>Consultar por WhatsApp</span>
               </a>
 
               <button
+                type="button"
                 onClick={() => onOpenContactModal(vehicle)}
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#C5A880] to-[#DFB76C] text-black font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#C5A880]/20 hover:opacity-95 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
+                className="w-full py-3.5 px-4 rounded-xl bg-gold-gradient bg-gold-gradient-hover text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
               >
                 <Mail className="w-4 h-4" />
-                <span>Solicitar Información o Cita</span>
+                <span>Reservar Cita Previa</span>
               </button>
 
               <a
                 href={`tel:${COMPANY_INFO.phoneRaw}`}
-                className="w-full py-3 px-4 rounded-xl bg-[#161722] hover:bg-[#1E202E] text-white border border-[#272938] text-xs font-semibold tracking-wider flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/15 text-xs font-bold tracking-wider flex items-center justify-center gap-2 transition-colors"
               >
-                <Phone className="w-4 h-4 text-[#C5A880]" />
+                <Phone className="w-4 h-4 text-[#D4AF37]" />
                 <span>Llamar: {COMPANY_INFO.phone}</span>
               </a>
             </div>
 
             {/* Dealer info banner */}
-            <div className="bg-[#151620] p-4 rounded-2xl border border-[#222431] space-y-2.5 text-xs text-[#8E92A4]">
+            <div className="bg-black/40 p-4 rounded-2xl border border-white/5 space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2 text-white font-semibold">
-                <MapPin className="w-3.5 h-3.5 text-[#C5A880]" />
+                <MapPin className="w-4 h-4 text-[#D4AF37]" />
                 <span>{COMPANY_INFO.location}</span>
               </div>
-              <p className="text-[11px] leading-relaxed">
-                Atención con cita previa. Revisión completa del coche y prueba dinámica para interesados cualificados.
+              <p className="text-[11px] leading-relaxed text-gray-400">
+                Atención personalizada con cita previa en Nave 6, La Pedrera. Entrega nacional disponible.
               </p>
             </div>
 
           </div>
 
           {/* Trade-in banner */}
-          <div className="bg-gradient-to-br from-[#14151E] to-[#0D0E13] border border-[#232534] rounded-3xl p-5 text-xs space-y-2">
+          <div className="glass-panel border border-white/10 rounded-3xl p-5 text-xs space-y-2">
             <div className="text-white font-bold flex items-center gap-1.5">
-              <span className="text-[#C5A880]">¿Tienes un coche para entregar?</span>
+              <span className="text-[#D4AF37]">¿Entregas tu coche a cambio?</span>
             </div>
-            <p className="text-[#8E92A4] text-[11px] leading-relaxed">
-              Aceptamos tu vehículo actual como parte de pago. Tasación inmediata y sin compromiso.
+            <p className="text-gray-400 text-[11px] leading-relaxed">
+              Tasamos tu vehículo actual como parte de pago con valoración máxima garantizada.
             </p>
           </div>
 
@@ -349,3 +362,4 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
     </div>
   );
 }
+
