@@ -11,10 +11,13 @@ import ContactPage from './pages/ContactPage';
 import { COMPANY_INFO } from './data/vehicles';
 import { storageService } from './services/storageService';
 import { MessageCircle } from 'lucide-react';
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminLoginPage from './pages/admin/AdminLoginPage';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname || '/');
   const [vehicles, setVehicles] = useState(() => storageService.getVehicles());
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => storageService.isAuthenticated());
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [modalVehicle, setModalVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +40,9 @@ export default function App() {
         if (window.location.pathname.startsWith('/vehiculo/')) {
           checkPathVehicle(window.location.pathname, fresh);
         }
+      }
+      if (detail.entity === 'auth' || detail.entity === 'all') {
+        setIsAdminAuthenticated(storageService.isAuthenticated());
       }
     });
 
@@ -111,6 +117,39 @@ export default function App() {
         );
     }
   };
+
+  // Admin Route Interceptor (Protected with login)
+  if (currentPath.startsWith('/admin')) {
+    if (!isAdminAuthenticated) {
+      return (
+        <AdminLoginPage
+          onLoginSuccess={() => {
+            setIsAdminAuthenticated(true);
+            navigate('/admin');
+          }}
+          onBackToPublic={() => navigate('/')}
+        />
+      );
+    }
+
+    let initialTab = 'dashboard';
+    if (currentPath.includes('/vehiculos')) initialTab = 'vehicles';
+    if (currentPath.includes('/solicitudes')) initialTab = 'requests';
+    if (currentPath.includes('/contactos')) initialTab = 'contacts';
+    if (currentPath.includes('/configuracion')) initialTab = 'settings';
+
+    return (
+      <AdminLayout
+        initialTab={initialTab}
+        onNavigatePublic={navigate}
+        onLogout={() => {
+          storageService.logout();
+          setIsAdminAuthenticated(false);
+          navigate('/admin');
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#08080A] text-[#E4E6EB] selection:bg-[#C5A880] selection:text-black">

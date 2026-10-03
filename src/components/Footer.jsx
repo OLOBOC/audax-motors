@@ -1,7 +1,7 @@
 import React from 'react';
 import AudaxLogo from './AudaxLogo';
 import { COMPANY_INFO } from '../data/vehicles';
-import { Instagram, Phone, MapPin, Clock, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { Instagram, Phone, MapPin, Clock, ArrowUpRight, ShieldCheck, Lock } from 'lucide-react';
 
 export default function Footer({ navigate }) {
   return (
@@ -155,10 +155,20 @@ export default function Footer({ navigate }) {
           <div>
             © {new Date().getFullYear()} Audax Motors. Todos los derechos reservados.
           </div>
-          <div className="flex items-center gap-4 text-[11px]">
+          <div className="flex items-center gap-3 sm:gap-4 text-[11px] flex-wrap">
             <span>Gijón · Asturias</span>
             <span>•</span>
             <span className="text-[#D4AF37]">Impulsados por la pasión</span>
+            <span>•</span>
+            <button
+              type="button"
+              onClick={() => navigate('/admin')}
+              className="text-gray-600 hover:text-[#C5A880] transition-colors flex items-center gap-1"
+              title="Panel de Control Audax Motors"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Acceso Gestión</span>
+            </button>
           </div>
         </div>
       </div>
