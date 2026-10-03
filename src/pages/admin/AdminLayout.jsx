@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, Car, Inbox, MessageSquare, Settings, 
-  ExternalLink, LogOut, ShieldCheck, Sparkles, Menu, X 
+  ExternalLink, LogOut, Menu, X, Lock
 } from 'lucide-react';
-import AudaxLogo from '../../components/AudaxLogo';
 import { storageService } from '../../services/storageService';
 import AdminDashboardPage from './AdminDashboardPage';
 import AdminVehiclesPage from './AdminVehiclesPage';
@@ -76,7 +75,7 @@ export default function AdminLayout({ onNavigatePublic, onLogout, initialTab = '
       {/* ─── ADMIN TOPBAR ─────────────────────────────────────────────── */}
       <header className="sticky top-0 z-40 bg-[#0B0C12]/95 backdrop-blur-md border-b border-[#1E202E]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-18">
+          <div className="flex items-center justify-between h-16">
             
             {/* Logo and Brand Title */}
             <div className="flex items-center gap-3">
@@ -85,14 +84,21 @@ export default function AdminLayout({ onNavigatePublic, onLogout, initialTab = '
                 onClick={() => handleSelectTab('dashboard')}
                 className="flex items-center gap-3 text-left group"
               >
-                <AudaxLogo className="w-9 h-9" />
-                <div>
-                  <div className="text-sm font-black font-display text-white tracking-wider flex items-center gap-1.5">
-                    <span>AUDAX</span>
-                    <span className="text-gold-gradient">MOTORS</span>
+                {/* Logo image only — no AudaxLogo component to avoid text duplication */}
+                <img
+                  src="/img/logo_audax.png"
+                  alt="Audax Motors"
+                  className="h-8 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(197,168,128,0.3)]"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+                <div className="flex flex-col justify-center leading-none">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-black font-display text-white tracking-[0.15em] uppercase">AUDAX</span>
+                    <span className="text-sm font-black font-display tracking-[0.15em] uppercase" style={{background: 'linear-gradient(135deg, #F5E3C3 0%, #C5A880 50%, #A07C50 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>MOTORS</span>
                   </div>
-                  <div className="text-[9px] font-extrabold uppercase tracking-[0.25em] text-[#C5A880]">
-                    Panel de Gestión
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <Lock className="w-2.5 h-2.5 text-[#C5A880]" />
+                    <span className="text-[9px] font-extrabold uppercase tracking-[0.2em] text-[#C5A880]">Panel de Gestión</span>
                   </div>
                 </div>
               </button>
