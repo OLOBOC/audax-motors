@@ -257,7 +257,7 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-                <span>Garantía Europea 12 Meses</span>
+                <span>Revisado en Taller Propio</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#D4AF37]" />

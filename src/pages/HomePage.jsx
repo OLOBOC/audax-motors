@@ -46,7 +46,7 @@ export default function HomePage({ navigate, onSelectVehicle }) {
                 <span className="text-gold-gradient">confianza y selección.</span>
               </h1>
               <p className="text-base sm:text-xl text-gray-300 max-w-xl font-normal leading-relaxed pt-1">
-                Impulsados por la pasión. Compraventa de vehículos seminuevos y de ocasión revisados en 150 puntos, con garantía europea y atención personalizada en La Pedrera, Gijón.
+                Impulsados por la pasión. Compraventa y gestión de vehículos de ocasión con trato directo y revisión honesta en La Pedrera, Gijón.
               </p>
             </div>
 
@@ -73,16 +73,16 @@ export default function HomePage({ navigate, onSelectVehicle }) {
             {/* Trust Metrics */}
             <div className="pt-8 grid grid-cols-3 gap-6 border-t border-white/10 max-w-xl">
               <div className="flex flex-col">
-                <span className="text-white font-black text-xl sm:text-2xl font-display">150 Puntos</span>
-                <span className="text-[11px] text-gray-400">Revisión Certificada</span>
+                <span className="text-white font-black text-xl sm:text-2xl font-display">+5 Años</span>
+                <span className="text-[11px] text-gray-400">En el sector</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-[#D4AF37] font-black text-xl sm:text-2xl font-display">12 Meses</span>
-                <span className="text-[11px] text-gray-400">Garantía Incluida</span>
+                <span className="text-[#D4AF37] font-black text-xl sm:text-2xl font-display">Asturias</span>
+                <span className="text-[11px] text-gray-400">Nos desplazamos</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-black text-xl sm:text-2xl font-display">100%</span>
-                <span className="text-[11px] text-gray-400">Financiación a Medida</span>
+                <span className="text-[11px] text-gray-400">Papeleo incluido</span>
               </div>
             </div>
 
@@ -300,49 +300,74 @@ export default function HomePage({ navigate, onSelectVehicle }) {
 
       {/* SELL YOUR CAR BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-r from-[#0F1118] via-[#151722] to-[#0F1118] border border-amber-500/20 p-8 sm:p-12 overflow-hidden shadow-2xl">
-          
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-30 hidden md:block">
-            <img
-              src="/cars/mercedes_cla_real.jpg"
-              alt="Tasación Audax Motors"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0F1118] to-transparent" />
-          </div>
+        <div className="relative rounded-3xl bg-gradient-to-br from-[#0F1118] via-[#151722] to-[#0A0B10] border border-amber-500/20 p-8 sm:p-12 overflow-hidden shadow-2xl">
 
-          <div className="relative z-10 max-w-xl space-y-5">
-            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
-              ¿Quieres vender tu coche actual?
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-white leading-tight">
-              Compramos tu vehículo o gestionamos su venta con total garantía.
-            </h2>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Tasación profesional inmediata y transparente en Gijón. Gestionamos la transferencia completa para tu tranquilidad.
-            </p>
+          {/* Decorative background */}
+          <div className="absolute inset-0 opacity-[0.04]"
+            style={{ backgroundImage: 'radial-gradient(circle at 80% 50%, #C5A880 0%, transparent 60%)' }}
+          />
 
-            <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-gray-200">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
-                <span>Tasación justa y rápida</span>
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            
+            {/* Left: Copy */}
+            <div className="space-y-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C5A880]/10 border border-[#C5A880]/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+                <span className="text-[10px] font-extrabold tracking-[0.25em] uppercase text-[#C5A880]">Tasación en &lt;24h · Toda Asturias</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
-                <span>Pago e inicio de cambio de nombre</span>
-              </div>
-            </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-white leading-tight">
+                ¿Quieres vender tu coche sin complicaciones?
+              </h2>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                <strong className="text-white">Compramos tu coche directamente</strong> con oferta en menos de 24h, o nos encargamos de venderlo por ti gestionando todo y cobrando solo una comisión. Papeleo incluido, tú no haces nada.
+              </p>
 
-            <div className="pt-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-200">
+                {[
+                  'Oferta en menos de 24h',
+                  'Pago inmediato al cerrar',
+                  'Cambio de titularidad incluido',
+                  'Nos desplazamos a tu coche',
+                ].map((t) => (
+                  <div key={t} className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
+                    <span>{t}</span>
+                  </div>
+                ))}
+              </div>
+
               <button
                 type="button"
                 onClick={() => navigate('/vende-tu-coche')}
                 className="px-8 py-3.5 rounded-xl bg-gold-gradient bg-gold-gradient-hover text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:scale-105 transition-all inline-flex items-center gap-2"
               >
-                <span>Solicitar Tasación Inmediata</span>
+                <span>Tasar mi coche gratis</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Right: Christian Rey mini card */}
+            <div className="bg-black/30 border border-white/10 rounded-2xl p-5 space-y-4 backdrop-blur-sm">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#C5A880]">
+                Quién te atiende
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C5A880]/30 to-[#C5A880]/10 border border-[#C5A880]/30 flex items-center justify-center text-[#C5A880] font-black text-lg font-display flex-shrink-0">
+                  CR
+                </div>
+                <div>
+                  <div className="text-white font-bold text-sm">Christian Rey</div>
+                  <div className="text-[11px] text-[#C5A880]">Fundador · Audax Motors</div>
+                </div>
+              </div>
+              <div className="space-y-2 text-[11px] text-gray-400 leading-relaxed">
+                <p>✓ Asturiano con más de 5 años en el sector</p>
+                <p>✓ Trato directo — sin intermediarios</p>
+                <p>✓ Taller propio para valorar de verdad</p>
+                <p>✓ Si cerramos el trato, el pago es inmediato</p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

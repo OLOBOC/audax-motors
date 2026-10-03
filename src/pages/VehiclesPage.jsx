@@ -87,7 +87,7 @@ export default function VehiclesPage({ onSelectVehicle }) {
           Vehículos Disponibles en Gijón
         </h1>
         <p className="text-sm text-gray-300 max-w-2xl">
-          Explora nuestro catálogo de automóviles seminuevos y de ocasión con revisión en 150 puntos y garantía de 12 meses.
+          Explora nuestro catálogo de automóviles seminuevos y de ocasión, revisados minuciosamente en taller propio y con garantía incluida.
         </p>
       </div>
 

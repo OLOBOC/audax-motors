@@ -130,10 +130,10 @@ export default function Footer({ navigate }) {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-[#D4AF37] text-xs font-bold uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Garantía Audax 12 Meses</span>
+                <span>Revisión y Papeleo Incluido</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
-                Cada automóvil pasa por un riguroso control mecánico en 150 puntos. Sin intermediarios opacos, con máxima claridad.
+                Compramos tu coche directamente o gestionamos su venta. Trato directo con Christian, sin intermediarios.
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-[11px]">

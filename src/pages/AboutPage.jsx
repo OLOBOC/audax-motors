@@ -34,7 +34,7 @@ export default function AboutPage({ navigate }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
             <div className="text-[11px] font-bold uppercase tracking-widest text-[#C5A880]">
-              Entregas Reales
+              Entregas y Clientes
             </div>
             <div className="text-xl font-bold font-display text-white mt-1">
               Confianza de nuestros clientes
@@ -66,6 +66,61 @@ export default function AboutPage({ navigate }) {
           </div>
         </div>
 
+      </div>
+
+      {/* Christian Rey — Fundador */}
+      <div className="bg-[#0E0F16] border border-[#1E202B] rounded-3xl p-8 sm:p-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          
+          <div className="space-y-5">
+            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#C5A880] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#C5A880]" />
+              El fundador
+            </div>
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-white">Christian Rey</h2>
+              <p className="text-[#C5A880] font-semibold text-sm mt-1">Fundador de Audax Motors · Gijón, Asturias</p>
+            </div>
+            <p className="text-sm text-[#A0A4B4] leading-relaxed">
+              Con más de 5 años de experiencia consolidada en el sector automotriz en Asturias. Cada vehículo de Audax Motors pasa por una exhaustiva revisión técnica en taller propio antes de su venta, asegurando transparencia absoluta y máxima tranquilidad.
+            </p>
+            <div className="space-y-3">
+              {[
+                { label: 'Trato directo', desc: 'Sin intermediarios ni comerciales. Hablas con Christian, punto.' },
+                { label: 'Taller propio', desc: 'Pruebas mecánicas reales. Sabe lo que compra y lo que vale.' },
+                { label: 'Su palabra es su reputación', desc: 'Nada de ofertas que no se cumplen. El pago es inmediato al cerrar.' },
+              ].map((item) => (
+                <div key={item.label} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-[#C5A880] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-white text-xs block">{item.label}</strong>
+                    <span className="text-[11px] text-[#8E92A4]">{item.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Avatar / initials card */}
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-[#C5A880]/30 via-[#C5A880]/15 to-[#C5A880]/5 border border-[#C5A880]/30 flex items-center justify-center text-[#C5A880] font-black text-5xl font-display shadow-xl shadow-[#C5A880]/10">
+              CR
+            </div>
+            <div className="text-center">
+              <div className="text-white font-bold">Christian Rey</div>
+              <div className="text-[11px] text-[#C5A880] mt-0.5">Cercanía y profesionalidad en Gijón</div>
+            </div>
+            <a
+              href={COMPANY_INFO.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 px-5 py-2.5 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-2 hover:bg-emerald-600/30 transition-colors"
+            >
+              <span>Hablar con Christian</span>
+            </a>
+          </div>
+
+        </div>
       </div>
 
       {/* Values & Principles */}

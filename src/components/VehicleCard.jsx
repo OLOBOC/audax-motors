@@ -96,8 +96,8 @@ export default function VehicleCard({ vehicle, onSelect }) {
         {/* Warranty Badge & Action Button */}
         <div className="pt-2 space-y-2">
           <div className="flex items-center justify-between text-[11px] text-gray-400 px-1">
-            <span className="flex items-center gap-1 text-emerald-400 font-medium">
-              <ShieldCheck className="w-3.5 h-3.5" /> 12 Meses de Garantía
+            <span className="flex items-center gap-1 text-[#C5A880] font-medium">
+              <ShieldCheck className="w-3.5 h-3.5" /> Revisado en Taller Propio
             </span>
             <span>Gijón, Asturias</span>
           </div>
