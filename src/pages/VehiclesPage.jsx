@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { VEHICLES } from '../data/vehicles';
+import { storageService } from '../services/storageService';
 import VehicleCard from '../components/VehicleCard';
 import { Search, RotateCcw, Car, Sparkles } from 'lucide-react';
 
-export default function VehiclesPage({ onSelectVehicle }) {
+export default function VehiclesPage({ onSelectVehicle, vehicles: propVehicles }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('all');
   const [selectedFuel, setSelectedFuel] = useState('all');
@@ -11,14 +11,16 @@ export default function VehiclesPage({ onSelectVehicle }) {
   const [maxPrice, setMaxPrice] = useState('all');
   const [selectedYear, setSelectedYear] = useState('all');
 
+  const vehicles = propVehicles || storageService.getVehicles();
+
   // Extract unique brands
   const brands = useMemo(() => {
-    return ['all', ...Array.from(new Set(VEHICLES.map((v) => v.brand)))];
-  }, []);
+    return ['all', ...Array.from(new Set(vehicles.map((v) => v.brand)))];
+  }, [vehicles]);
 
   // Filter vehicles
   const filteredVehicles = useMemo(() => {
-    return VEHICLES.filter((vehicle) => {
+    return vehicles.filter((vehicle) => {
       // Search term
       const searchStr = `${vehicle.brand} ${vehicle.model} ${vehicle.version} ${vehicle.tagline}`.toLowerCase();
       if (searchTerm && !searchStr.includes(searchTerm.toLowerCase())) {
@@ -204,7 +206,7 @@ export default function VehiclesPage({ onSelectVehicle }) {
         {/* Counter and Reset */}
         <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
           <div className="text-gray-300">
-            Mostrando <span className="text-[#D4AF37] font-bold">{filteredVehicles.length}</span> de <span className="text-white font-bold">{VEHICLES.length}</span> unidades en stock
+            Mostrando <span className="text-[#D4AF37] font-bold">{filteredVehicles.length}</span> de <span className="text-white font-bold">{vehicles.length}</span> unidades en stock
           </div>
 
           {hasActiveFilters && (

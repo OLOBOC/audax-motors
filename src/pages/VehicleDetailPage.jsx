@@ -4,12 +4,15 @@ import FinanceCalculator from '../components/FinanceCalculator';
 import { 
   ArrowLeft, MessageCircle, Phone, Mail, Calendar, Gauge, Fuel, Cog, 
   Zap, ShieldCheck, CheckCircle2, ChevronLeft, ChevronRight, Share2, 
-  MapPin, FileCheck, Sparkles 
+  MapPin, FileCheck, Sparkles, AlertCircle
 } from 'lucide-react';
 
 export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
+
+  const isSold = vehicle?.isSold || vehicle?.status === 'Vendido';
+  const isReserved = vehicle?.isReserved || vehicle?.status === 'Reservado';
 
   if (!vehicle) {
     return (
@@ -275,9 +278,20 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
             
             {/* Header / Brand */}
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                {vehicle.brand}
-              </span>
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                  {vehicle.brand}
+                </span>
+                {isSold ? (
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-red-600 text-white">
+                    Vendido
+                  </span>
+                ) : isReserved ? (
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-500 text-black">
+                    Reservado
+                  </span>
+                ) : null}
+              </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white mt-1">
                 {vehicle.model}
               </h1>
@@ -286,15 +300,40 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
               </p>
             </div>
 
+            {/* Status Warning Banner if Sold or Reserved */}
+            {isReserved && (
+              <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <strong className="block text-white font-bold">Vehículo Actualmente Reservado</strong>
+                  <span className="text-[11px] leading-relaxed text-amber-200/80">
+                    Esta unidad cuenta con una reserva activa. Si te interesa, puedes ponerte en contacto con nosotros para entrar en lista preferente por si la operación no llega a concretarse.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {isSold && (
+              <div className="p-4 rounded-2xl bg-red-950/40 border border-red-500/30 text-red-200 text-xs flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <strong className="block text-white font-bold">Unidad Vendida</strong>
+                  <span className="text-[11px] leading-relaxed text-red-200/80">
+                    Este automóvil ya ha sido entregado a su nuevo propietario. Puedes pedirnos que busquemos una unidad similar para ti en nuestro taller propio.
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* Price section */}
             <div className="py-4 border-y border-white/10">
               <span className="text-[11px] uppercase tracking-wider text-gray-400 block">
-                Precio al contado
+                {isSold ? 'Precio de venta' : 'Precio al contado'}
               </span>
               <div className="text-3xl sm:text-4xl font-black font-display text-white mt-0.5">
                 {vehicle.priceFormatted}
               </div>
-              {vehicle.monthlyPrice && (
+              {vehicle.monthlyPrice && !isSold && (
                 <div className="text-xs text-gray-300 mt-2 flex items-center gap-1.5">
                   <span>Financiación orientativa desde</span>
                   <span className="text-[#D4AF37] font-bold">{vehicle.monthlyPrice}</span>
@@ -311,16 +350,20 @@ export default function VehicleDetailPage({ vehicle, onBack, onOpenContactModal 
                 className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Consultar por WhatsApp</span>
+                <span>{isSold ? 'Consultar similares por WhatsApp' : isReserved ? 'Consultar lista de espera por WhatsApp' : 'Consultar por WhatsApp'}</span>
               </a>
 
               <button
                 type="button"
                 onClick={() => onOpenContactModal(vehicle)}
-                className="w-full py-3.5 px-4 rounded-xl bg-gold-gradient bg-gold-gradient-hover text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
+                className={`w-full py-3.5 px-4 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all hover:scale-[1.02] ${
+                  isSold
+                    ? 'bg-white/10 text-white hover:bg-white/15'
+                    : 'bg-gold-gradient bg-gold-gradient-hover text-black shadow-amber-500/20'
+                }`}
               >
                 <Mail className="w-4 h-4" />
-                <span>Reservar Cita Previa</span>
+                <span>{isSold ? 'Solicitar Coche a la Carta' : isReserved ? 'Avisarme si se libera' : 'Reservar Cita Previa'}</span>
               </button>
 
               <a

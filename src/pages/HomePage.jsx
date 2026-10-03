@@ -1,13 +1,15 @@
 import React from 'react';
-import { VEHICLES, COMPANY_INFO } from '../data/vehicles';
+import { COMPANY_INFO } from '../data/vehicles';
+import { storageService } from '../services/storageService';
 import VehicleCard from '../components/VehicleCard';
 import FinanceCalculator from '../components/FinanceCalculator';
 import { ArrowRight, Instagram, ShieldCheck, Sparkles, Phone, MessageCircle, CheckCircle2, ChevronRight, MapPin, Award, Car, Clock } from 'lucide-react';
 
-export default function HomePage({ navigate, onSelectVehicle }) {
-  const featuredVehicles = VEHICLES.filter((v) => v.featured);
-  const remainingVehicles = VEHICLES.filter((v) => !v.featured);
-  const heroCar = VEHICLES[0]; // Honda Civic Sport Plus real
+export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehicles }) {
+  const vehicles = propVehicles || storageService.getVehicles();
+  const featuredVehicles = vehicles.filter((v) => v.featured || v.badge === 'Destacado');
+  const remainingVehicles = vehicles.filter((v) => !v.featured && v.badge !== 'Destacado');
+  const heroCar = featuredVehicles[0] || vehicles[0];
 
   return (
     <div className="space-y-24 pb-16">
@@ -196,7 +198,7 @@ export default function HomePage({ navigate, onSelectVehicle }) {
             onClick={() => navigate('/vehiculos')}
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-[#F3E5C8] transition-colors"
           >
-            <span>Ver catálogo completo ({VEHICLES.length} unidades)</span>
+            <span>Ver catálogo completo ({vehicles.length} unidades)</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>

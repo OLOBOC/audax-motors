@@ -8,16 +8,18 @@ import VehicleDetailPage from './pages/VehicleDetailPage';
 import SellCarPage from './pages/SellCarPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import { VEHICLES, COMPANY_INFO } from './data/vehicles';
+import { COMPANY_INFO } from './data/vehicles';
+import { storageService } from './services/storageService';
 import { MessageCircle } from 'lucide-react';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname || '/');
+  const [vehicles, setVehicles] = useState(() => storageService.getVehicles());
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [modalVehicle, setModalVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Sync state with browser URL
+  // Sync state with browser URL & reactive storage events
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname || '/';
@@ -26,16 +28,29 @@ export default function App() {
     };
 
     window.addEventListener('popstate', handlePopState);
-    // Initial check
     checkPathVehicle(window.location.pathname || '/');
 
-    return () => window.removeEventListener('popstate', handlePopState);
+    const unsubscribe = storageService.subscribe((detail) => {
+      if (detail.entity === 'vehicles' || detail.entity === 'all') {
+        const fresh = storageService.getVehicles();
+        setVehicles(fresh);
+        if (window.location.pathname.startsWith('/vehiculo/')) {
+          checkPathVehicle(window.location.pathname, fresh);
+        }
+      }
+    });
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      unsubscribe();
+    };
   }, []);
 
-  const checkPathVehicle = (path) => {
+  const checkPathVehicle = (path, list = null) => {
     if (path.startsWith('/vehiculo/')) {
       const slug = path.replace('/vehiculo/', '');
-      const found = VEHICLES.find((v) => v.slug === slug || v.id === slug);
+      const pool = list || storageService.getVehicles();
+      const found = pool.find((v) => v.slug === slug || v.id === slug);
       if (found) {
         setSelectedVehicle(found);
       }
@@ -78,7 +93,7 @@ export default function App() {
 
     switch (currentPath) {
       case '/vehiculos':
-        return <VehiclesPage onSelectVehicle={handleSelectVehicle} />;
+        return <VehiclesPage vehicles={vehicles} onSelectVehicle={handleSelectVehicle} />;
       case '/vende-tu-coche':
         return <SellCarPage />;
       case '/quienes-somos':
@@ -89,6 +104,7 @@ export default function App() {
       default:
         return (
           <HomePage
+            vehicles={vehicles}
             navigate={navigate}
             onSelectVehicle={handleSelectVehicle}
           />

@@ -3,6 +3,7 @@ import { Calendar, Gauge, Fuel, Cog, ArrowUpRight, ShieldCheck } from 'lucide-re
 
 export default function VehicleCard({ vehicle, onSelect }) {
   const isSold = vehicle.isSold || vehicle.status === 'Vendido';
+  const isReserved = vehicle.isReserved || vehicle.status === 'Reservado';
 
   return (
     <div
@@ -23,19 +24,29 @@ export default function VehicleCard({ vehicle, onSelect }) {
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
-          {isSold ? (
-            <span className="px-3 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-red-600 text-white shadow-lg">
-              VENDIDO
-            </span>
-          ) : vehicle.badge ? (
-            <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 shadow-md">
-              {vehicle.badge}
-            </span>
-          ) : (
-            <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-emerald-950/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
-              Disponible
-            </span>
-          )}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {isSold ? (
+              <span className="px-3 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-red-600 text-white shadow-lg">
+                VENDIDO
+              </span>
+            ) : isReserved ? (
+              <span className="px-2.5 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider bg-amber-500 text-black shadow-lg">
+                RESERVADO
+              </span>
+            ) : null}
+
+            {vehicle.badge && (
+              <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-black/80 backdrop-blur-md text-[#D4AF37] border border-[#D4AF37]/40 shadow-md">
+                {vehicle.badge}
+              </span>
+            )}
+
+            {!isSold && !isReserved && !vehicle.badge && (
+              <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-emerald-950/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+                Disponible
+              </span>
+            )}
+          </div>
 
           <span className="px-2.5 py-1 rounded-lg text-[10px] font-bold text-white bg-black/70 backdrop-blur-md border border-white/15">
             {vehicle.power}
@@ -104,9 +115,17 @@ export default function VehicleCard({ vehicle, onSelect }) {
 
           <button
             type="button"
-            className="w-full py-2.5 px-4 rounded-xl bg-white/5 group-hover:bg-gold-gradient text-xs font-bold uppercase tracking-wider text-white group-hover:text-black transition-all duration-300 flex items-center justify-center gap-2 border border-white/10 group-hover:border-transparent group-hover:shadow-lg group-hover:shadow-amber-500/20"
+            className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 border ${
+              isSold
+                ? 'bg-red-950/30 text-red-300 border-red-500/25 group-hover:bg-red-900/40'
+                : isReserved
+                ? 'bg-amber-950/40 text-amber-300 border-amber-500/40 group-hover:bg-amber-900/50'
+                : 'bg-white/5 group-hover:bg-gold-gradient text-white group-hover:text-black border-white/10 group-hover:border-transparent group-hover:shadow-lg group-hover:shadow-amber-500/20'
+            }`}
           >
-            <span>Ver Ficha Completa</span>
+            <span>
+              {isSold ? 'Ver Unidad Vendida' : isReserved ? 'Vehículo Reservado · Ver Ficha' : 'Ver Ficha Completa'}
+            </span>
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </div>
