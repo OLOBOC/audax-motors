@@ -29,6 +29,8 @@ const TRUST_ITEMS = [
   },
 ];
 
+import { storageService } from '../services/storageService';
+
 export default function SellCarPage() {
   const [formData, setFormData] = useState({
     brand: '',
@@ -44,18 +46,39 @@ export default function SellCarPage() {
   });
 
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [photoPreviews, setPhotoPreviews] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
   const handleFileChange = (e) => {
     if (e.target.files) {
-      const filesArray = Array.from(e.target.files).map((f) => f.name);
+      const files = Array.from(e.target.files);
+      const filesArray = files.map((f) => f.name);
       setUploadedFiles(filesArray);
+
+      // Previews for admin panel (up to 6 files)
+      const previewPromises = files.slice(0, 6).map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (ev) => resolve({ name: file.name, url: ev.target.result });
+          reader.onerror = () => resolve({ name: file.name, url: null });
+          reader.readAsDataURL(file);
+        });
+      });
+
+      Promise.all(previewPromises).then((previews) => {
+        setPhotoPreviews(previews);
+      });
+
       setFormData((prev) => ({ ...prev, photosCount: filesArray.length }));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    storageService.addPurchaseRequest({
+      ...formData,
+      photos: photoPreviews.length > 0 ? photoPreviews : uploadedFiles.map((name) => ({ name, url: null }))
+    });
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

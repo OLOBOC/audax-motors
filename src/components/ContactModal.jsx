@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, MessageCircle, Phone, CheckCircle, ShieldCheck } from 'lucide-react';
 import { COMPANY_INFO } from '../data/vehicles';
+import { storageService } from '../services/storageService';
 
 export default function ContactModal({ vehicle, isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -15,10 +16,18 @@ export default function ContactModal({ vehicle, isOpen, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    storageService.addContact({
+      ...formData,
+      subject: vehicle ? `Interés en ${vehicle.brand} ${vehicle.model}` : 'Consulta desde modal de vehículo',
+      vehicle: vehicle ? {
+        id: vehicle.id,
+        brand: vehicle.brand,
+        model: vehicle.model,
+        price: vehicle.priceFormatted,
+        slug: vehicle.slug
+      } : null
+    });
     setSubmitted(true);
-    setTimeout(() => {
-      // simulate receipt
-    }, 500);
   };
 
   const whatsappDirectMessage = vehicle

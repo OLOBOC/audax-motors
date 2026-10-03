@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { COMPANY_INFO } from '../data/vehicles';
+import { storageService } from '../services/storageService';
 import { 
   Phone, MessageCircle, Mail, MapPin, Clock, 
   Instagram, Send, CheckCircle, ShieldCheck, ArrowUpRight 
@@ -17,6 +17,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    storageService.addContact(formData);
     setSubmitted(true);
   };
 
