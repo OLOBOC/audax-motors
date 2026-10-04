@@ -2,7 +2,6 @@ import React from 'react';
 import { COMPANY_INFO } from '../data/vehicles';
 import { storageService } from '../services/storageService';
 import VehicleCard from '../components/VehicleCard';
-import FinanceCalculator from '../components/FinanceCalculator';
 import { ArrowRight, Instagram, ShieldCheck, Sparkles, Phone, MessageCircle, CheckCircle2, ChevronRight, MapPin, Award, Car, Clock, Star, Quote } from 'lucide-react';
 
 export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehicles }) {
@@ -303,10 +302,7 @@ export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehi
 
       </section>
 
-      {/* FINANCE CALCULATOR SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FinanceCalculator initialPrice={24500} vehicleName="Mercedes-Benz CLA Coupé" />
-      </section>
+
 
       {/* TESTIMONIALS & GOOGLE REVIEWS SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
