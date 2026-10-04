@@ -3,7 +3,7 @@ import { COMPANY_INFO } from '../data/vehicles';
 import { storageService } from '../services/storageService';
 import VehicleCard from '../components/VehicleCard';
 import FinanceCalculator from '../components/FinanceCalculator';
-import { ArrowRight, Instagram, ShieldCheck, Sparkles, Phone, MessageCircle, CheckCircle2, ChevronRight, MapPin, Award, Car, Clock } from 'lucide-react';
+import { ArrowRight, Instagram, ShieldCheck, Sparkles, Phone, MessageCircle, CheckCircle2, ChevronRight, MapPin, Award, Car, Clock, Star, Quote } from 'lucide-react';
 
 export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehicles }) {
   const vehicles = propVehicles || storageService.getVehicles();
@@ -299,6 +299,114 @@ export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehi
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FinanceCalculator initialPrice={24500} vehicleName="Mercedes-Benz CLA Coupé" />
       </section>
+
+      {/* TESTIMONIALS & GOOGLE REVIEWS SECTION */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-2">
+            <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37]" />
+              Experiencias Reales
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-white">
+              Opiniones de Quienes Ya Conducen con Audax
+            </h2>
+            <p className="text-sm text-gray-400 max-w-xl">
+              La mejor carta de presentación es la satisfacción y tranquilidad de nuestros clientes en toda Asturias.
+            </p>
+          </div>
+
+          {/* Rating Badge */}
+          <div className="flex items-center gap-4 px-5 py-3 rounded-2xl bg-[#10121A] border border-[#D4AF37]/30 shadow-xl self-start md:self-auto">
+            <div className="text-3xl font-black font-display text-[#D4AF37]">4.9</div>
+            <div>
+              <div className="flex items-center gap-1 text-[#D4AF37]">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-[#D4AF37]" />
+                ))}
+              </div>
+              <span className="text-[11px] text-gray-400 font-medium block mt-0.5">
+                Valoración media · Google Reviews
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              name: 'Rodrigo M.',
+              location: 'Gijón',
+              car: 'Honda Civic Sport Plus',
+              rating: 5,
+              date: 'Hace 3 semanas',
+              comment: 'Compré el Honda Civic y la experiencia fue inmejorable. El coche estaba impecable tal y como me dijo Christian por WhatsApp. Revisado a fondo y con el cambio de nombre resuelto en 24h. Trato de 10.',
+              tag: 'Compra en exposición'
+            },
+            {
+              name: 'David G.',
+              location: 'Oviedo',
+              car: 'Mercedes-Benz CLA Coupé',
+              rating: 5,
+              date: 'Hace 1 mes',
+              comment: 'Entregué mi coche anterior como parte de pago y me llevé el CLA. Tasación seria, sin regateos absurdos ni letra pequeña. Se nota que conocen la mecánica y cuidan lo que venden.',
+              tag: 'Tasación y cambio'
+            },
+            {
+              name: 'Paula & Nacho',
+              location: 'Avilés',
+              car: 'Fiat Ducato Camper',
+              rating: 5,
+              date: 'Hace 2 meses',
+              comment: 'Buscábamos una furgoneta fiable para viajar. Nos atendieron un sábado con cita previa en la nave y nos explicaron cada detalle con total cercanía y honestidad. Da muchísima tranquilidad.',
+              tag: 'Vehículo camperizado'
+            }
+          ].map((review, idx) => (
+            <div
+              key={idx}
+              className="relative p-6 sm:p-7 rounded-3xl bg-[#0F1118] border border-white/10 hover:border-[#D4AF37]/40 transition-all flex flex-col justify-between space-y-5 group"
+            >
+              <div className="space-y-4">
+                {/* Top: Stars & Tag */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-[#D4AF37]">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#D4AF37]" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">
+                    {review.tag}
+                  </span>
+                </div>
+
+                {/* Comment */}
+                <p className="text-sm text-gray-300 leading-relaxed italic">
+                  "{review.comment}"
+                </p>
+              </div>
+
+              {/* Bottom: Client info & car */}
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
+                    <span>{review.name}</span>
+                    <span className="text-xs text-gray-400 font-normal">({review.location})</span>
+                  </h4>
+                  <span className="text-[11px] text-[#D4AF37] font-medium block mt-0.5">
+                    {review.car}
+                  </span>
+                </div>
+                <span className="text-[10px] text-gray-500">{review.date}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </section>
+
 
       {/* SELL YOUR CAR BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
