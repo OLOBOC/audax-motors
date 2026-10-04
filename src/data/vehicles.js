@@ -235,6 +235,7 @@ export const COMPANY_INFO = {
   location: "Gijón, Asturias, España",
   address: "Camino de las Escuelas 8, La Pedrera, Nave 6, 33390 Gijón, Asturias",
   addressDetail: "Camino de las Escuelas 8, La Pedrera, Nave 6, 33390 Gijón, Asturias (Atención con cita previa)",
+  googleMapsUrl: "https://www.google.com/maps/place/Naves+Gij%C3%B3n/@43.4923465,-5.6930552,206m/data=!3m1!1e3!4m6!3m5!1s0xd36635193e5f735:0x5670ced443439b69!8m2!3d43.4922726!4d-5.6924676!16s%2Fg%2F11w1vdgpz6?entry=ttu&g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D",
   schedule: "Lunes a Viernes: 09:30 - 14:00 y 16:30 - 20:00 | Sábados con cita previa",
   email: "contacto@audaxmotors.es",
   instagramHandle: "@audaxmotors_",

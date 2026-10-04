@@ -180,11 +180,20 @@ export default function AboutPage({ navigate }) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <a
+            href={COMPANY_INFO.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3.5 rounded-xl bg-[#161722] hover:bg-[#1F212D] text-white border border-[#272A3B] hover:border-[#C5A880]/50 text-xs font-semibold uppercase tracking-wider transition-all text-center flex items-center justify-center gap-2"
+          >
+            <MapPin className="w-4 h-4 text-[#C5A880]" />
+            <span>Google Maps</span>
+          </a>
           <button
             onClick={() => navigate('/contacto')}
             className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#C5A880] to-[#DFB76C] text-black font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#C5A880]/20 hover:scale-105 transition-all text-center"
           >
-            Contactar o Pedir Cita
+            Pedir Cita
           </button>
           <button
             onClick={() => navigate('/vehiculos')}

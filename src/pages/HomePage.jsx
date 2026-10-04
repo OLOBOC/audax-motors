@@ -137,13 +137,21 @@ export default function HomePage({ navigate, onSelectVehicle, vehicles: propVehi
               </p>
 
               <div className="space-y-3 pt-2 text-xs text-gray-200">
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
-                  <MapPin className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+                <a
+                  href={COMPANY_INFO.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-[#D4AF37]/40 hover:bg-black/60 transition-all group/map"
+                >
+                  <MapPin className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5 group-hover/map:scale-110 transition-transform" />
                   <div>
-                    <strong className="block text-white font-semibold">Dirección Física:</strong>
-                    <span>{COMPANY_INFO.address}</span>
+                    <strong className="block text-white font-semibold flex items-center gap-1.5">
+                      <span>Dirección Física</span>
+                      <span className="text-[10px] text-[#D4AF37] font-normal underline">Abrir en Maps ↗</span>
+                    </strong>
+                    <span className="text-gray-300 group-hover/map:text-white transition-colors">{COMPANY_INFO.address}</span>
                   </div>
-                </div>
+                </a>
 
                 <div className="flex items-start gap-3 p-3 rounded-xl bg-black/40 border border-white/5">
                   <Clock className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />

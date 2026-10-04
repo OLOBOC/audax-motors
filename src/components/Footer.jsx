@@ -110,8 +110,15 @@ export default function Footer({ navigate }) {
                 <MapPin className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
                 <div>
                   <span className="text-gray-500 text-[11px] block">Ubicación:</span>
-                  <span className="text-white font-medium">{COMPANY_INFO.address}</span>
-                  <span className="text-[11px] text-gray-400 block">Atención con cita previa</span>
+                  <a
+                    href={COMPANY_INFO.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-[#D4AF37] transition-colors font-medium block"
+                  >
+                    {COMPANY_INFO.address}
+                  </a>
+                  <span className="text-[11px] text-gray-400 block">Atención con cita previa · Ver en Google Maps ↗</span>
                 </div>
               </li>
               <li className="flex items-start gap-3">

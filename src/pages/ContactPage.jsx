@@ -22,9 +22,7 @@ export default function ContactPage() {
     setSubmitted(true);
   };
 
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    'Camino de las Escuelas 8 La Pedrera Nave 6, 33390 Gijón Asturias'
-  )}`;
+  const googleMapsUrl = COMPANY_INFO.googleMapsUrl;
 
   return (
     <div className="pt-28 pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -125,10 +123,11 @@ export default function ContactPage() {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-[#C5A880] hover:underline font-semibold"
+                className="w-full py-2.5 px-4 rounded-xl bg-[#C5A880]/15 hover:bg-[#C5A880]/25 border border-[#C5A880]/30 text-[#C5A880] hover:text-white transition-all text-xs font-bold inline-flex items-center justify-center gap-2 group"
               >
-                <span>Cómo llegar en Google Maps</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <MapPin className="w-4 h-4 text-[#C5A880]" />
+                <span>Abrir ubicación en Google Maps</span>
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
 
